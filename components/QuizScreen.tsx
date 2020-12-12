@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { startJob, randomizeArray } from "./Helpers"
 import { Question } from "./Question"
 
@@ -21,6 +21,8 @@ export const QuizScreen = () => {
   }, [])
 
   useEffect(() => {
+    if (!questions) return
+    if (questions.length === 0) return
     if (questions[0] !== currentQuestion) {
     setCurrentQuestion(questions[0])
     }
@@ -69,10 +71,24 @@ export const QuizScreen = () => {
     setTimeout(() => {setQuestions(questions.slice(1))}, 200)
   }
 
+  const handleFiftyFifty = () => {
+
+  }
+
+  const handlePass = () => {
+    setTimeout(() => {setQuestions(questions.slice(1))}, 200)
+    setDisabled(true)
+  }
+
+  const handleCheat = () => {
+    handleCorrect()
+  }
+
   return (
     <View style={styles.quizView}>
       <View style={styles.scoreView}>
-        <Text style={styles.score}>Current best run: {highScore}</Text>
+      <Text style={styles.score}>Current run: {score}</Text>
+        <Text style={styles.score}>Best run: {highScore}</Text>
       </View>
       <View style={styles.questionView}>
         {currentQuestion && 
@@ -82,6 +98,23 @@ export const QuizScreen = () => {
           correct_answer={currentQuestion.correct_answer} 
           answerQuestion={answerQuestion} 
           />}
+      </View>
+      <View style={styles.lifelineView}>
+        <TouchableOpacity style={styles.button} onPress={() => handlePass()}>
+          <Text style={styles.buttonText}>
+            PASS
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => handleCheat()}>
+          <Text style={styles.buttonText}>
+            CHEAT
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => handleFiftyFifty()}>
+          <Text style={styles.buttonText}>
+            50/50
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -95,14 +128,32 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   score: {
-    fontSize: 18,
+    fontSize: 30,
   },
   quizView: {
     flex: 1,
+    justifyContent: "space-evenly"
   },
   questionView: {
-    flex: 0.9,
+    flex: 0.5,
     justifyContent: "center",
     alignItems: "center",
+  },
+  lifelineView: {
+    flex: 0.1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  buttonText: {
+    fontSize: 20, 
+    color: '#fff',
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  button: { 
+    backgroundColor: '#a082ed', 
+    padding: '5%', 
+    borderRadius: 40, 
+    width: '30%',
   },
 })

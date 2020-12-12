@@ -29,8 +29,30 @@ export const Answer = ({answer, index, correct, answerQuestion, disabled}: any) 
 }
 
 const styles = StyleSheet.create({
-  buttonText: {fontSize: 20, color: '#fff'},
-  button: { backgroundColor: '#a082ed', margin: '5%', padding: '5%', borderRadius: 10, width: '90%', textAlign: 'center' },
-  buttonCorrect: { backgroundColor: 'green', margin: '5%', padding: '5%', borderRadius: 10, width: '90%', textAlign: 'center' },
-  buttonIncorrect: { backgroundColor: 'red', margin: '5%', padding: '5%', borderRadius: 10, width: '90%', textAlign: 'center' },
+  buttonText: {
+    fontSize: 20, 
+    color: '#fff', 
+    textAlign: 'center'
+  },
+  button: { 
+    backgroundColor: '#a082ed', 
+    margin: '5%', 
+    padding: '5%', 
+    borderRadius: 10, 
+    width: '90%', 
+  },
+  buttonCorrect: { 
+    backgroundColor: 'green', 
+    margin: '5%', 
+    padding: '5%', 
+    borderRadius: 10, 
+    width: '90%',
+  },
+  buttonIncorrect: { 
+    backgroundColor: 'red', 
+    margin: '5%', 
+    padding: '5%', 
+    borderRadius: 10, 
+    width: '90%',
+  },
 })
