@@ -3,6 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { startJob, randomizeArray } from "./Helpers"
 import { Question } from "./Question"
 
+const initialLifelineState = {
+  fiftyFifty: false,
+  cheat: false,
+  pass: false,
+}
+
 export const QuizScreen = () => {
   const [questions, setQuestions] = useState([])
   const [currentQuestion, setCurrentQuestion] = useState<any>()
@@ -11,6 +17,7 @@ export const QuizScreen = () => {
   const [disabled, setDisabled] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [highScore, setHighScore] = useState(0)
+  const [disabledLifelines, setDisabledLifelines] = useState(initialLifelineState)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,20 +75,32 @@ export const QuizScreen = () => {
       setHighScore(score)
     }
     setScore(0)
+    setDisabledLifelines(initialLifelineState)
     setTimeout(() => {setQuestions(questions.slice(1))}, 200)
   }
 
   const handleFiftyFifty = () => {
-
+    setDisabledLifelines({
+      ...disabledLifelines,
+      fiftyFifty: true,
+    })
   }
 
   const handlePass = () => {
     setTimeout(() => {setQuestions(questions.slice(1))}, 200)
     setDisabled(true)
+    setDisabledLifelines({
+      ...disabledLifelines,
+      pass: true,
+    })
   }
 
   const handleCheat = () => {
     handleCorrect()
+    setDisabledLifelines({
+      ...disabledLifelines,
+      cheat: true,
+    })
   }
 
   return (
@@ -100,17 +119,17 @@ export const QuizScreen = () => {
           />}
       </View>
       <View style={styles.lifelineView}>
-        <TouchableOpacity style={styles.button} onPress={() => handlePass()}>
+        <TouchableOpacity disabled={disabledLifelines.pass} style={disabledLifelines.pass ? styles.buttonUsed : styles.button} onPress={() => handlePass()}>
           <Text style={styles.buttonText}>
             PASS
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => handleCheat()}>
+        <TouchableOpacity disabled={disabledLifelines.cheat} style={disabledLifelines.cheat ? styles.buttonUsed : styles.button} onPress={() => handleCheat()}>
           <Text style={styles.buttonText}>
             CHEAT
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => handleFiftyFifty()}>
+        <TouchableOpacity disabled={disabledLifelines.fiftyFifty} style={disabledLifelines.fiftyFifty ? styles.buttonUsed : styles.button} onPress={() => handleFiftyFifty()}>
           <Text style={styles.buttonText}>
             50/50
           </Text>
@@ -151,9 +170,15 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   button: { 
-    backgroundColor: '#a082ed', 
+    backgroundColor: '#45d3be', 
     padding: '5%', 
     borderRadius: 40, 
     width: '30%',
   },
+  buttonUsed: {
+    backgroundColor: '#535454', 
+    padding: '5%', 
+    borderRadius: 40, 
+    width: '30%',
+  }
 })
