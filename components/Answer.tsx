@@ -6,21 +6,26 @@ const entities = new Html5Entities();
 
 export const Answer = ({answer, index, correct, answerQuestion, disabled}: any) => {
   const [style, setStyle] = useState(styles.button)
+
   useEffect(() => {
     setStyle(styles.button)
   }, [answer])
-  console.log(answer, correct)
-    const handlePress = () => {
-      setStyle(correct ? styles.buttonCorrect : styles.buttonIncorrect)
-      answerQuestion(correct)
-    }
 
-    return <TouchableOpacity
-        disabled={disabled}
-        onPress={() => handlePress()}
-        style={style}>
-        <Text style={styles.buttonText}>{entities.decode(answer)}</Text>
-      </TouchableOpacity>
+  console.log(answer, correct)
+
+  const handlePress = () => {
+    setStyle(correct ? styles.buttonCorrect : styles.buttonIncorrect)
+    answerQuestion(correct)
+  }
+
+  return  <TouchableOpacity
+            disabled={disabled}
+            onPress={() => handlePress()}
+            style={style}>
+              <Text style={styles.buttonText}>
+                {entities.decode(answer)}
+              </Text>
+          </TouchableOpacity>
 }
 
 const styles = StyleSheet.create({

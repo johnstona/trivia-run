@@ -9,14 +9,26 @@ export const Question = ({question, correct_answer, answers, answerQuestion, dis
   
   return (
     <>
-      <Text style={styles.title}>{entities.decode(question)}</Text>
+      <Text style={styles.title}>
+        {entities.decode(question)}
+      </Text>
         {answers.map((a: string, i: number) => {
-            return <Answer key={a + i} disabled={disabled} answer={a} index={i} correct={a === correct_answer} answerQuestion={answerQuestion}/>
+            return <Answer key={a + i} 
+                    disabled={disabled} 
+                    answer={a} index={i} 
+                    correct={a === correct_answer} 
+                    answerQuestion={answerQuestion}
+                    />
         })}
       </>
   )
 }
 
 const styles = StyleSheet.create({
-  title: {color: '#888', fontSize: 18, width: '90%', textAlign: 'center'},
+  title: {
+    color: '#888', 
+    fontSize: 18, 
+    width: '90%', 
+    textAlign: 'center'
+  },
 })

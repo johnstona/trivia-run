@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Modal, Alert, TouchableHighlight, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { startJob, randomizeArray } from "./Helpers"
 import { Question } from "./Question"
 

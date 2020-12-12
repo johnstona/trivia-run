@@ -15,13 +15,27 @@ export const HomeScreen = ({ navigation }: any) => {
 }
 
 const styles = StyleSheet.create({
-  button: { backgroundColor: '#a082ed', margin: '5%', padding: '5%', borderRadius: 10, width: '90%', textAlign: 'center' },
+  button: { 
+    backgroundColor: '#a082ed', 
+    margin: '5%', padding: '5%', 
+    borderRadius: 10, 
+    width: '90%', 
+    textAlign: 'center' 
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonText: {fontSize: 20, color: '#fff'},
-  title: {color: '#888', fontSize: 18, width: '90%', textAlign: 'center'},
+  buttonText: {
+    fontSize: 20, 
+    color: '#fff'
+  },
+  title: {
+    color: '#888', 
+    fontSize: 18, 
+    width: '90%', 
+    textAlign: 'center'
+  },
 })
